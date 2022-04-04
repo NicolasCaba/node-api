@@ -6,6 +6,7 @@ const dbConnect = require('./config/mongo');
 const app = express();
 
 app.use(cors());
+app.use(express.json());
 
 // Routes
 app.use('/api', require('./routes/index.routes'));
