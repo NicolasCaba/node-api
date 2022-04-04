@@ -8,6 +8,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Static assets
+app.use(express.static('storage'));
+
 // Routes
 app.use('/api', require('./routes/index.routes'));
 
