@@ -13,7 +13,18 @@ const getItems = async (req, res) => {
   
 };
 
-const getItem = (req, res) => {};
+const getItem = async (req, res) => {
+  
+  try {
+    req = matchedData(req);
+    const { id } = req;
+    const data = await tracksModel.findById(id);
+    res.send({data});
+  } catch (error) {
+    handleHttpError(res, 'Error en get item');
+  }
+
+};
 
 const createItem = async (req, res) => {
 
@@ -28,8 +39,32 @@ const createItem = async (req, res) => {
   
 };
 
-const updateItem = (req, res) => {};
+const updateItem = async (req, res) => {
 
-const deleteItem = (req, res) => {};
+  try {
+    const { id, ...body } = matchedData(req);
+
+    const data = await tracksModel.findOneAndUpdate(
+      id, body
+    );
+    res.send({ data });
+  } catch (error) {
+    handleHttpError(res, 'Error al actualizar una nueva cancion');
+  }
+
+};
+
+const deleteItem = async (req, res) => {
+
+  try {
+    req = matchedData(req);
+    const { id } = req;
+    const data = await tracksModel.deleteOne({_id: id});
+    res.send({data});
+  } catch (error) {
+    handleHttpError(res, 'Error en delete item');
+  }
+
+};
 
 module.exports = { getItems, getItem, createItem, updateItem, deleteItem };
