@@ -39,7 +39,7 @@ const validatorCreateItem = [
   (req, res, next) => validateResults(req, res, next)
 ];
 
-validatorGetItem = [
+const validatorGetItem = [
   check('id')
     .exists()
     .notEmpty()
