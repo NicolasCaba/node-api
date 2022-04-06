@@ -1,17 +1,6 @@
 const { check } = require('express-validator');
 const validateResults = require('../utils/handleValidator');
 
-const validatorCreateItem = [
-  check('url')
-    .exists()
-    .notEmpty()
-    .isURL(),
-  check('filename')
-    .exists()
-    .notEmpty(),
-  (req, res, next) => validateResults(req, res, next)
-]
-
 const validatorGetItem = [
   check('id')
     .exists()
@@ -20,4 +9,4 @@ const validatorGetItem = [
   (req, res, next) => validateResults(req, res, next)
 ]
 
-module.exports = { validatorCreateItem, validatorGetItem };
+module.exports = { validatorGetItem };

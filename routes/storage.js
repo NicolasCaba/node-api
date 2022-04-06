@@ -1,13 +1,19 @@
 const express = require('express');
 const uploadMiddleware = require('../utils/handleStorage');
-const { createItem, getItem, getItems, updateItem, deleteItem } = require('../controllers/storage');
-const { validatorCreateItem, validatorGetItem } = require('../validators/storage');
+const { createItem, getItem, getItems, deleteItem } = require('../controllers/storage');
+const { validatorGetItem } = require('../validators/storage');
 const router = express.Router();
 
+// Get storage
 router.get('/', getItems);
+
+// Get storage/:id
 router.get('/:id', validatorGetItem, getItem);
+
+// Create new file
 router.post('/', uploadMiddleware.single('myfile'), createItem);
-router.put('/:id', validatorGetItem, validatorCreateItem, updateItem);
+
+// Delete file
 router.delete('/:id', validatorGetItem, deleteItem);
 
 module.exports = router;
